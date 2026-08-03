@@ -8,9 +8,9 @@ interface InfoRowProps {
 
 const InfoRow = ({ label, value, emphasized }: InfoRowProps) => {
   return (
-    <View style={styles.container}>
-      <Text>{label}</Text>
-      <Text>{value}</Text>
+    <View style={styles.row}>
+      <Text style={styles.label}>{label}</Text>
+      <Text style={styles.value}>{value}</Text>
     </View>
   );
 };
@@ -18,10 +18,19 @@ const InfoRow = ({ label, value, emphasized }: InfoRowProps) => {
 export default InfoRow;
 
 const styles = StyleSheet.create({
-  container: {
+  row: {
     display: "flex",
     flexDirection: "row",
-    alignItems: "center",
-    gap: 12,
+    gap: 14,
+    width: "100%",
+    marginBottom: 8,
+  },
+  label: {
+    width: 100,
+    fontWeight: "bold",
+  },
+  value: {
+    flex: 1,
+    color: "#333",
   },
 });
