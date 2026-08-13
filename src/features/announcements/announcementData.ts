@@ -2,51 +2,68 @@ import { Announcement } from "./types";
 
 export const announcements: Announcement[] = [
   {
-    id: "1",
-    title: "Thông báo lịch đăng ký học phần học kỳ 1 năm học 2026-2027",
+    id: "ann-1",
+    title: "Official Summer Semester Exam Schedule for 2025 - 2026",
     summary:
-      "Sinh viên các khóa xem kỹ thời khóa biểu dự kiến và tiến hành đăng ký học phần trên cổng thông tin sinh viên theo đúng thời gian quy định.",
+      "The Academic Affairs Office has announced the detailed exam schedule for all summer semester courses. Students are reminded to check their personal portal for exam schedules and bring their student ID cards before entering the examination room.",
     category: "academic",
-    publishedAt: "2026-08-10T08:30:00Z",
+    publishedAt: "2026-08-10",
   },
   {
-    id: "2",
-    title: "Lịch nghỉ lễ Quốc Khánh 2/9 và các hoạt động trực tuyến",
+    id: "ann-2",
+    title: "Campus Cup 2026 Football Tournament Kicks Off This Week",
     summary:
-      "Nhà trường thông báo lịch nghỉ lễ 2/9 từ ngày 01/09 đến hết ngày 02/09. Chúc toàn thể giảng viên và sinh viên có kỳ nghỉ vui vẻ.",
-    category: "service",
-    publishedAt: "2026-08-09T14:00:00Z",
-  },
-  {
-    id: "3",
-    title: "Ngày hội việc làm TechJob Fair 2026 tại khuôn viên trường",
-    summary:
-      "Cơ hội gặp gỡ hơn 50 doanh nghiệp công nghệ lớn, nhận tư vấn nghề nghiệp trực tiếp và phỏng vấn thử ngay tại sảnh hội trường lớn.",
+      "The Campus Cup officially returns with the participation of 16 teams from various faculties. The opening ceremony and the first match will take place at 17:00 this Friday at the central stadium.",
     category: "event",
-    publishedAt: "2026-08-08T09:15:00Z",
+    publishedAt: "2026-08-09",
   },
   {
-    id: "4",
-    title: "Triển khai hệ thống điểm danh bằng khuôn mặt tại các giảng đường",
+    id: "ann-3",
+    title: "Wi-Fi System Maintenance Across Main Lecture Hall Areas",
     summary:
-      "Từ tuần tới, nhà trường chính thức đưa vào vận hành hệ thống điểm danh thông minh qua app Smart Campus. Đề nghị sinh viên cập nhật ảnh chân dung.",
+      "The IT Center will perform routine upgrades to the Wi-Fi network infrastructure in Lecture Halls A and B from 22:00 tonight to 04:00 tomorrow morning. Network connectivity may be disrupted during this period.",
     category: "service",
-    publishedAt: "2026-08-07T10:45:00Z",
+    publishedAt: "2026-08-08",
   },
   {
-    id: "5",
-    title: "Hội thảo khoa học sinh viên: Xu hướng Trí tuệ Nhân tạo 2026",
+    id: "ann-4",
+    title: "Late Major Specialization Registration for Cohort 2024",
     summary:
-      "Tham gia buổi chia sẻ chuyên đề về LLM và ứng dụng thực tế cùng các chuyên gia hàng đầu ngành công nghệ tại phòng họp B204.",
-    category: "event",
-    publishedAt: "2026-08-05T13:30:00Z",
-  },
-  {
-    id: "6",
-    title: "Thông báo v/v nộp học phí bổ sung và gia hạn thời hạn đóng",
-    summary:
-      "Danh sách sinh viên chưa hoàn thành học phí đợt 1 cần hoàn tất trước ngày 15/08 để tránh bị khóa tài khoản cổng thông tin sinh viên.",
+      "The deadline for submitting specialization preference forms for Information Technology students in Cohort 2024 has been extended to August 15. The system will automatically close registration after this deadline.",
     category: "academic",
-    publishedAt: "2026-08-04T16:20:00Z",
+    publishedAt: "2026-08-07",
+  },
+  {
+    id: "ann-5",
+    title: "Scientific Workshop: AI Applications in Mobile Development",
+    summary:
+      "An opportunity to network with leading experts from Silicon Valley discussing AI Agent trends and next-generation React Native. Register early to receive a certificate of participation from the organizers.",
+    category: "event",
+    publishedAt: "2026-08-06",
+  },
+  {
+    id: "ann-6",
+    title: "Extended Operating Hours at the Central Library",
+    summary:
+      "To support final exam preparations, the university library will extend its opening hours until 22:00 daily, effective from August 12 through August 25. Night-study areas will remain open 24/7.",
+    category: "service",
+    publishedAt: "2026-08-05",
+  },
+  {
+    id: "ann-7",
+    title:
+      "Notice on Submitting Applications for Tuition Fee Exemption Renewal (Semester I)",
+    summary:
+      "Eligible students under policy categories should prepare and submit all notarized documents to renew their tuition fee exemption applications for the new semester. Document drop-off is at the One-Stop Office, Room 102.",
+    category: "academic",
+    publishedAt: "2026-08-04",
+  },
+  {
+    id: "ann-8",
+    title: "Registration Open for Campus First Aid Training Workshop",
+    summary:
+      "The campus medical station, in collaboration with the Red Cross, is organizing a free basic first aid training course exclusively for students. Participants will practice treating injuries and performing CPR.",
+    category: "event",
+    publishedAt: "2026-08-03",
   },
 ];

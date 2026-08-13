@@ -9,11 +9,10 @@ import ActionList from "./actions/ActionList";
 import { courses } from "./courses/courseData";
 import SearchField from "../components/SearchField";
 import { useState } from "react";
-import PrimaryButton from "../components/PrimaryButton";
+("lucide-react-native");
+import { AnnouncementsFeed } from "./announcements/AnnouncementsFeed";
 import { commonStyles } from "../styles";
-import { SecondaryButton } from "../components/SecondaryButton";
-import { IconButton } from "../components/IconButton";
-import { ChevronLeft, ChevronRight, House } from "lucide-react-native";
+import { announcements } from "./announcements/announcementData";
 
 export interface StudentSummary {
   id: string;
@@ -39,18 +38,6 @@ const HomeScreen = () => {
     console.log(`Search for ${searchKey}`);
   };
 
-  const handlePrimaryButtonPress = () => {
-    console.log(`Primary button pressed`);
-  };
-
-  const handleSecondaryButtonPress = () => {
-    console.log(`Secondary button pressed`);
-  };
-
-  const handleIconButtonPress = () => {
-    console.log(`Icon button pressed`);
-  };
-
   return (
     <SafeAreaProvider>
       <ScrollView contentContainerStyle={styles.content}>
@@ -61,7 +48,7 @@ const HomeScreen = () => {
         <View style={styles.welcomeCard}>
           <Avatar name={student.name} size={72} uri={student.photoUrl!} />
           <View style={styles.welcomeText}>
-            <Text style={styles.eyebrow}>CHÀO MỪNG</Text>
+            <Text style={styles.eyebrow}>WELCOME!</Text>
             <Text style={styles.studentName}>{student.name}</Text>
             <Text style={styles.studentProgram}>{student.program}</Text>
           </View>
@@ -73,41 +60,19 @@ const HomeScreen = () => {
           <InfoRow label="Year" value={`Year ${student.year}`} />
         </View> */}
 
-        <CourseList courses={courses} />
-
-        <ActionList actions={quickActions} />
-
-        <SearchField
-          value={searchKey}
-          onChangeText={setSearchKey}
-          onSubmit={handleSubmit}
-        />
+        <View>
+          <Text style={commonStyles.sectionTitle}>My courses</Text>
+          <CourseList courses={courses} />
+        </View>
 
         <View>
-          <Text style={commonStyles.sectionTitle}>Test nút bấm</Text>
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <SecondaryButton
-              onPress={handleSecondaryButtonPress}
-              title="Back"
-              leftIcon={<ChevronLeft />}
-            />
-            <PrimaryButton
-              onPress={handlePrimaryButtonPress}
-              title="Next"
-              rightIcon={<ChevronRight />}
-            />
-            <IconButton
-              onPress={handleIconButtonPress}
-              icon={<House />}
-              accessibilityLabel="Icon button"
-            />
-          </View>
+          <Text style={commonStyles.sectionTitle}>Quick actions</Text>
+          <ActionList actions={quickActions} />
+        </View>
+
+        <View>
+          <Text style={commonStyles.sectionTitle}>Announcements</Text>
+          <AnnouncementsFeed announcements={announcements} />
         </View>
       </ScrollView>
     </SafeAreaProvider>
@@ -137,7 +102,7 @@ const styles = StyleSheet.create({
     fontWeight: 600,
     color: colors.accent,
     letterSpacing: 1,
-    marginBottom: 2,
+    marginBottom: 12,
   },
   studentName: {
     color: colors.surface,

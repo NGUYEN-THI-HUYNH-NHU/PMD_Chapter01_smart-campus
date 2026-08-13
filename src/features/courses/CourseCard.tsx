@@ -32,7 +32,7 @@ export function CourseCard({ course, onPress }: CourseCardProps) {
         }
       : {
           accessibilityLabel:
-            course.imageLabel || `Ảnh minh họa cho khóa học ${course.title}`,
+            course.imageLabel || `Illustration for the course ${course.title}`,
         };
 
   return (
@@ -40,7 +40,7 @@ export function CourseCard({ course, onPress }: CourseCardProps) {
       onPress={() => onPress(course.id)}
       style={({ pressed }) => [styles.card, pressed && styles.cardPressed]}
       accessibilityRole="button"
-      accessibilityHint="Bấm vào để xem thông tin chi tiết môn học này"
+      accessibilityHint="Click to see this course's details"
     >
       <View style={styles.imageContainer}>
         <Image
@@ -74,7 +74,7 @@ export function CourseCard({ course, onPress }: CourseCardProps) {
         <Text numberOfLines={2} style={styles.title}>
           {course.title}
         </Text>
-        <Text style={styles.instructor}>GV: {course.instructor}</Text>
+        <Text style={styles.instructor}>Lecturer: {course.instructor}</Text>
 
         <View style={styles.progressSection}>
           <View style={styles.progressBarBg}>

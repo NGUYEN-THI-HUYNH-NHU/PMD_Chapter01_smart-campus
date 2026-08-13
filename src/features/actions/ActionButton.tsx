@@ -1,6 +1,6 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import { QuickAction } from "./types";
-import { colors, radius, spacing } from "../../theme";
+import { colors, radius, spacing, typography } from "../../theme";
 
 interface ActionButtonProps {
   action: QuickAction;
@@ -14,6 +14,8 @@ const ActionButton = ({ action, onPress }: ActionButtonProps) => {
         pressed && styles.actionCardPressed,
       ]}
       onPress={() => onPress(action.id)}
+      accessibilityLabel={`${action.label}. ${action.description}`}
+      accessibilityHint="Click to open the shortcut for this feature"
     >
       <Text style={styles.actionLabel}>{action.label}</Text>
       <Text
@@ -34,24 +36,26 @@ const styles = StyleSheet.create({
     flexBasis: "47%",
     flexGrow: 1,
     minHeight: 80,
-    display: "flex",
     justifyContent: "space-between",
     padding: spacing.md,
+    borderWidth: 1,
     borderColor: colors.border,
     borderRadius: radius.md,
-    backgroundColor: colors.secondary,
+    backgroundColor: colors.surface,
   },
   actionCardPressed: {
-    backgroundColor: "#a0d7f8",
+    backgroundColor: "rgba(23, 107, 154, 0.12)",
+    borderColor: "rgba(23, 107, 154, 0.12)",
   },
   actionLabel: {
+    ...typography.title,
     fontSize: 14,
-    fontWeight: "bold",
     color: colors.primaryDark,
   },
   actionDescription: {
-    color: colors.primary,
+    ...typography.body,
     fontStyle: "italic",
     fontSize: 12,
+    color: colors.muted,
   },
 });
