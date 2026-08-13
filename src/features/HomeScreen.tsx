@@ -4,7 +4,6 @@ import { colors, radius, spacing } from "../theme";
 import Header from "../components/Header";
 import Avatar from "../components/Avatar";
 import InfoRow from "../components/InfoRow";
-import StudentCard from "../components/StudentCard";
 
 export interface StudentSummary {
   id: string;
@@ -34,7 +33,8 @@ const HomeScreen = () => {
     {
       id: "schedule",
       label: "View schedule",
-      description: "Check your daily classes, exams, and room changes",
+      description:
+        "Quickly access and review your complete, up-to-date daily timetable including upcoming classes, room changes, sudden instructor updates, laboratory sessions, and important academic examination slots across all registered semesters.",
     },
     {
       id: "map",
@@ -69,7 +69,6 @@ const HomeScreen = () => {
           <InfoRow label="Student ID" value={student.id} />
           <InfoRow label="Year" value={`Year ${student.year}`} />
         </View>
-        {/* <StudentCard /> */}
 
         <Text>Quick actions</Text>
         <View style={styles.actions}>
@@ -82,7 +81,13 @@ const HomeScreen = () => {
               ]}
             >
               <Text style={styles.actionLabel}>{action.label}</Text>
-              <Text style={styles.actionDescription}>{action.description}</Text>
+              <Text
+                style={styles.actionDescription}
+                numberOfLines={3}
+                ellipsizeMode="tail"
+              >
+                {action.description}
+              </Text>
             </Pressable>
           ))}
         </View>
@@ -95,7 +100,11 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: colors.background },
-  content: { padding: spacing.md, gap: spacing.lg },
+  content: {
+    padding: spacing.md,
+    gap: spacing.lg,
+    marginTop: 30,
+  },
   welcomeCard: {
     flexDirection: "row",
     alignItems: "center",
@@ -114,13 +123,15 @@ const styles = StyleSheet.create({
     flexBasis: "47%",
     flexGrow: 1,
     minHeight: 116,
+    display: "flex",
+    justifyContent: "space-between",
     padding: spacing.md,
     borderColor: colors.border,
     borderRadius: radius.md,
     backgroundColor: colors.secondary,
   },
   actionCardPressed: {
-    backgroundColor: "#75b6dc",
+    backgroundColor: "#84c4ea",
   },
   defaultText: {
     fontSize: 16,
@@ -149,10 +160,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     color: colors.primaryDark,
-    marginBottom: 10,
   },
   actionDescription: {
     color: colors.primary,
     fontStyle: "italic",
+    fontSize: 12,
   },
 });
