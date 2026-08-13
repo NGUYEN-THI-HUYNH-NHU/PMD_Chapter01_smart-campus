@@ -1,15 +1,15 @@
+import React from "react";
 import {
   Text,
   Pressable,
   StyleSheet,
-  View,
   ActivityIndicator,
+  View,
 } from "react-native";
-import React from "react";
-import { BaseButtonProps } from "./types/buttonTypes";
 import { colors, radius, spacing, typography } from "../theme";
+import { BaseButtonProps } from "./types/buttonTypes";
 
-const PrimaryButton = ({
+export function SecondaryButton({
   title,
   loading = false,
   disabled = false,
@@ -19,7 +19,7 @@ const PrimaryButton = ({
   textStyle,
   onPress,
   ...rest
-}: BaseButtonProps) => {
+}: BaseButtonProps) {
   const isDisabled = disabled || loading;
 
   return (
@@ -38,7 +38,7 @@ const PrimaryButton = ({
     >
       <View style={styles.touchTargetWrapper}>
         {loading ? (
-          <ActivityIndicator size="small" color={colors.surface} />
+          <ActivityIndicator size="small" color={colors.primary} />
         ) : (
           <View style={styles.contentContainer}>
             {leftIcon && <View style={styles.iconLeft}>{leftIcon}</View>}
@@ -49,20 +49,18 @@ const PrimaryButton = ({
       </View>
     </Pressable>
   );
-};
-
-export default PrimaryButton;
+}
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.primary,
+    borderWidth: 1.5,
+    borderColor: colors.primary,
     borderRadius: radius.md,
-    overflow: "hidden",
   },
   touchTargetWrapper: {
     minHeight: 48,
     minWidth: 48,
-    paddingHorizontal: spacing.lg,
+    paddingHorizontal: spacing.md,
     paddingVertical: spacing.sm,
     justifyContent: "center",
     alignItems: "center",
@@ -74,7 +72,7 @@ const styles = StyleSheet.create({
   },
   text: {
     ...typography.label,
-    color: colors.surface,
+    color: colors.primary,
     fontSize: 16,
     fontWeight: "600",
     textAlign: "center",
@@ -86,11 +84,12 @@ const styles = StyleSheet.create({
     marginLeft: spacing.sm,
   },
   pressed: {
-    opacity: 0.85,
+    backgroundColor: "rgba(0, 0, 0, 0.05)",
     transform: [{ scale: 0.98 }],
   },
   disabled: {
-    backgroundColor: colors.border,
-    opacity: 0.6,
+    borderColor: colors.border,
+    backgroundColor: "transparent",
+    opacity: 0.5,
   },
 });

@@ -9,6 +9,11 @@ import ActionList from "./actions/ActionList";
 import { courses } from "./courses/courseData";
 import SearchField from "../components/SearchField";
 import { useState } from "react";
+import PrimaryButton from "../components/PrimaryButton";
+import { commonStyles } from "../styles";
+import { SecondaryButton } from "../components/SecondaryButton";
+import { IconButton } from "../components/IconButton";
+import { ChevronLeft, ChevronRight, House } from "lucide-react-native";
 
 export interface StudentSummary {
   id: string;
@@ -32,6 +37,18 @@ const HomeScreen = () => {
 
   const handleSubmit = () => {
     console.log(`Search for ${searchKey}`);
+  };
+
+  const handlePrimaryButtonPress = () => {
+    console.log(`Primary button pressed`);
+  };
+
+  const handleSecondaryButtonPress = () => {
+    console.log(`Secondary button pressed`);
+  };
+
+  const handleIconButtonPress = () => {
+    console.log(`Icon button pressed`);
   };
 
   return (
@@ -65,6 +82,33 @@ const HomeScreen = () => {
           onChangeText={setSearchKey}
           onSubmit={handleSubmit}
         />
+
+        <View>
+          <Text style={commonStyles.sectionTitle}>Test nút bấm</Text>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <SecondaryButton
+              onPress={handleSecondaryButtonPress}
+              title="Back"
+              leftIcon={<ChevronLeft />}
+            />
+            <PrimaryButton
+              onPress={handlePrimaryButtonPress}
+              title="Next"
+              rightIcon={<ChevronRight />}
+            />
+            <IconButton
+              onPress={handleIconButtonPress}
+              icon={<House />}
+              accessibilityLabel="Icon button"
+            />
+          </View>
+        </View>
       </ScrollView>
     </SafeAreaProvider>
   );
@@ -77,7 +121,7 @@ const styles = StyleSheet.create({
   content: {
     padding: spacing.md,
     gap: spacing.lg,
-    marginTop: 30,
+    paddingVertical: 46,
   },
   welcomeCard: {
     flexDirection: "row",
