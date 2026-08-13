@@ -1,7 +1,7 @@
 export const colors = {
   primary: "#176B9A",
   primaryDark: "#17324D",
-  secondary: "#a3d3ef",
+  secondary: "#b5e0f9",
   accent: "#168A8A",
   background: "#F4F7F9",
   surface: "#FFFFFF",
@@ -9,7 +9,6 @@ export const colors = {
   muted: "#667784",
   border: "#D8E0E5",
   danger: "#B42318",
-  subTitle: "#afc8aa",
 } as const;
 
 export const spacing = {

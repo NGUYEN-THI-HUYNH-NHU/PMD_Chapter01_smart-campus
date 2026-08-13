@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
     flex: 1,
     minWidth: 0,
     height: "auto",
-    marginTop: 28,
   },
   headerTitle: {
     fontSize: 20,
