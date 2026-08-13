@@ -27,7 +27,6 @@ const CourseList = ({ courses }: CourseListProps) => {
   };
   return (
     <View style={styles.courseSection}>
-      <Text style={commonStyles.sectionTitle}>Khóa học của tôi</Text>
       <View style={styles.navButtons}>
         <Pressable
           onPress={goToPreviousCourse}

@@ -1,33 +1,48 @@
-import { View, Text, TextInput, StyleSheet } from "react-native";
+import { View, Text, TextInput, StyleSheet, Pressable } from "react-native";
 import React from "react";
-import { colors, radius, spacing } from "../theme";
-import { commonStyles } from "../styles";
+import { colors, radius, spacing, typography } from "../theme";
+import { X } from "lucide-react-native";
 
 interface SearchFieldProps {
   value: string;
-  onChangeText: (value: string) => void;
+  placeholder?: string;
+  onChangeText: (query: string) => void;
+  onDeleteText: () => void;
   onSubmit?: () => void;
 }
 
-const SearchField = ({ value, onChangeText, onSubmit }: SearchFieldProps) => {
+const SearchField = ({
+  value,
+  placeholder,
+  onChangeText,
+  onDeleteText,
+  onSubmit,
+}: SearchFieldProps) => {
   return (
     <View>
-      <Text
-        nativeID="announcement-search-label"
-        style={commonStyles.sectionTitle}
-      >
-        Tìm kiếm thông báo
-      </Text>
       <TextInput
         value={value}
         onChangeText={onChangeText}
         onSubmitEditing={onSubmit}
-        placeholder="Title, course, or service"
+        placeholder={placeholder}
         returnKeyType="search"
         accessibilityRole="search"
-        aria-labelledby="announcement-search-label"
-        style={styles.input}
+        clearButtonMode="while-editing"
+        style={styles.searchInput}
       />
+      {value && (
+        <Pressable
+          onPress={onDeleteText}
+          style={styles.clearBtn}
+          hitSlop={8}
+          accessibilityRole="button"
+          accessibilityLabel="Delete search keyword"
+        >
+          <Text style={styles.clearIcon}>
+            <X />
+          </Text>
+        </Pressable>
+      )}
     </View>
   );
 };
@@ -35,12 +50,21 @@ const SearchField = ({ value, onChangeText, onSubmit }: SearchFieldProps) => {
 export default SearchField;
 
 const styles = StyleSheet.create({
-  input: {
-    backgroundColor: colors.surface,
-    borderRadius: radius.round,
-    borderWidth: 1,
-    borderColor: colors.border,
-    overflow: "hidden",
-    padding: spacing.md,
+  searchInput: {
+    flex: 1,
+    height: 40,
+    ...typography.body,
+    fontSize: 14,
+    color: colors.text,
+  },
+  clearBtn: {
+    paddingHorizontal: spacing.xs,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  clearIcon: {
+    fontSize: 20,
+    color: colors.muted,
+    fontWeight: "bold",
   },
 });
