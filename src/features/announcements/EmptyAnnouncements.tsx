@@ -1,8 +1,8 @@
-import { Search } from "lucide-react-native";
+import { SearchX } from "lucide-react-native";
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import { colors, radius, spacing, typography } from "../../theme";
 
-interface EmptyAnnouncementsProps {
+export interface EmptyAnnouncementsProps {
   query: string;
   onDeleteQuery: () => void;
 }
@@ -14,10 +14,10 @@ const EmptyAnnouncements = ({
   return (
     <View style={styles.emptyContainer}>
       <Text style={styles.emptyIcon}>
-        <Search />
+        <SearchX />
       </Text>
       <Text style={styles.emptyText}>
-        {query && `Not found any announcement suiting ${query}`}
+        {query && `Not found any announcement suiting "${query}"`}
       </Text>
       {query && (
         <Pressable

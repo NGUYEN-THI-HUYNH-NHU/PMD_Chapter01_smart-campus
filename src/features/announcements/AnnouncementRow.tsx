@@ -56,8 +56,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    gap: spacing.md,
-    padding: spacing.md,
+    gap: spacing.sm,
+    padding: spacing.sm,
   },
   rowPressed: {
     backgroundColor: "#rgba(0, 0, 0, 0.03)",
@@ -68,13 +68,13 @@ const styles = StyleSheet.create({
   },
   title: {
     ...typography.heading,
-    fontSize: 15,
+    fontSize: 14,
     color: colors.text,
     lineHeight: 20,
   },
   summary: {
     ...typography.label,
-    fontSize: 11,
+    fontSize: 12,
     color: colors.muted,
     marginTop: 4,
   },

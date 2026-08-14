@@ -20,7 +20,7 @@ const ActionButton = ({ action, onPress }: ActionButtonProps) => {
       <Text style={styles.actionLabel}>{action.label}</Text>
       <Text
         style={styles.actionDescription}
-        numberOfLines={2}
+        numberOfLines={1}
         ellipsizeMode="tail"
       >
         {action.description}
@@ -35,9 +35,9 @@ const styles = StyleSheet.create({
   actionCard: {
     flexBasis: "47%",
     flexGrow: 1,
-    minHeight: 80,
+    minHeight: 60,
     justifyContent: "space-between",
-    padding: spacing.md,
+    padding: spacing.sm,
     borderWidth: 1,
     borderColor: colors.border,
     borderRadius: radius.md,
