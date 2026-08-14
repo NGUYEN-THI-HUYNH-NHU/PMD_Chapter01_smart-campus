@@ -1,4 +1,4 @@
-import { Announcement } from "./types";
+import { Announcement, AnnouncementSection } from "./types";
 
 export const announcements: Announcement[] = [
   {
@@ -7,7 +7,7 @@ export const announcements: Announcement[] = [
     summary:
       "The Academic Affairs Office has announced the detailed exam schedule for all summer semester courses. Students are reminded to check their personal portal for exam schedules and bring their student ID cards before entering the examination room.",
     category: "academic",
-    publishedAt: "2026-08-10",
+    publishedAt: "2026-08-14",
   },
   {
     id: "ann-2",
@@ -15,7 +15,7 @@ export const announcements: Announcement[] = [
     summary:
       "The Campus Cup officially returns with the participation of 16 teams from various faculties. The opening ceremony and the first match will take place at 17:00 this Friday at the central stadium.",
     category: "event",
-    publishedAt: "2026-08-09",
+    publishedAt: "2026-08-14",
   },
   {
     id: "ann-3",
@@ -23,7 +23,7 @@ export const announcements: Announcement[] = [
     summary:
       "The IT Center will perform routine upgrades to the Wi-Fi network infrastructure in Lecture Halls A and B from 22:00 tonight to 04:00 tomorrow morning. Network connectivity may be disrupted during this period.",
     category: "service",
-    publishedAt: "2026-08-08",
+    publishedAt: "2026-08-12",
   },
   {
     id: "ann-4",
@@ -66,4 +66,99 @@ export const announcements: Announcement[] = [
     category: "event",
     publishedAt: "2026-08-03",
   },
+  {
+    id: "ann-9",
+    title: "Annual International Student Cultural Exchange Festival",
+    summary:
+      "Experience traditional food, music, and art performances hosted by international student associations from over 20 countries. Join us at the main quadrangle this coming Saturday afternoon.",
+    category: "event",
+    publishedAt: "2026-08-02",
+  },
+  {
+    id: "ann-10",
+    title: "Dormitory Room Allocation Results for the Upcoming Academic Year",
+    summary:
+      "The Student Housing Department has published the official list of approved dormitory applications. Successful applicants must complete their check-in procedures and fee payments before August 20.",
+    category: "service",
+    publishedAt: "2026-08-01",
+  },
+  {
+    id: "ann-11",
+    title: "Guideline on Graduation Thesis Formatting and Submissions",
+    summary:
+      "Final-year students preparing to defend their graduation theses must follow the newly updated formatting guidelines published on the institutional repository. Late submissions will not be reviewed by the defense council.",
+    category: "academic",
+    publishedAt: "2026-07-30",
+  },
+  {
+    id: "ann-12",
+    title: "Career Fair 2026: Over 50 Tech and Corporate Partners",
+    summary:
+      "Connect directly with recruiters from top multinational corporations and local startups. Bring multiple copies of your resume and dress in business formal attire for on-the-spot interviews.",
+    category: "event",
+    publishedAt: "2026-07-28",
+  },
+  {
+    id: "ann-13",
+    title: "Campus Parking Lot B Temporary Closure for Resurfacing",
+    summary:
+      "Parking Lot B near the sports complex will be closed for asphalt resurfacing and line painting from August 18 to August 20. Faculty members and students are advised to use Parking Lot A instead.",
+    category: "service",
+    publishedAt: "2026-07-27",
+  },
+  {
+    id: "ann-14",
+    title: "Scholarship Grant Announcement from Global Tech Foundation",
+    summary:
+      "Applications are now open for high-achieving undergraduate students majoring in STEM fields. Selected scholars will receive full tuition coverage and mentorship opportunities with industry leaders.",
+    category: "academic",
+    publishedAt: "2026-07-25",
+  },
 ];
+
+export function groupAnnouncements(
+  list: Announcement[],
+): AnnouncementSection[] {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const dayOfWeek = today.getDay();
+  const distanceToMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+  const startOfWeek = new Date(today);
+  startOfWeek.setDate(today.getDate() - distanceToMonday);
+
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
+  const todayStr = `${year}-${month}-${day}`;
+
+  const groupToday: Announcement[] = [];
+  const groupThisWeek: Announcement[] = [];
+  const groupEarlier: Announcement[] = [];
+
+  list.forEach((item) => {
+    const itemDate = new Date(item.publishedAt);
+
+    if (item.publishedAt === todayStr) {
+      groupToday.push(item);
+    } else if (itemDate >= startOfWeek && itemDate < today) {
+      groupThisWeek.push(item);
+    } else {
+      groupEarlier.push(item);
+    }
+  });
+
+  const sections: AnnouncementSection[] = [];
+
+  if (groupToday.length > 0) {
+    sections.push({ title: "Today", data: groupToday });
+  }
+  if (groupThisWeek.length > 0) {
+    sections.push({ title: "This week", data: groupThisWeek });
+  }
+  if (groupEarlier.length > 0) {
+    sections.push({ title: "Earlier", data: groupEarlier });
+  }
+
+  return sections;
+}

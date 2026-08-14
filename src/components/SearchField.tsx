@@ -19,7 +19,7 @@ const SearchField = ({
   onSubmit,
 }: SearchFieldProps) => {
   return (
-    <View>
+    <View style={styles.container}>
       <TextInput
         value={value}
         onChangeText={onChangeText}
@@ -50,9 +50,15 @@ const SearchField = ({
 export default SearchField;
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: radius.sm,
+    paddingHorizontal: spacing.sm,
+  },
   searchInput: {
     flex: 1,
-    height: 40,
     ...typography.body,
     fontSize: 14,
     color: colors.text,

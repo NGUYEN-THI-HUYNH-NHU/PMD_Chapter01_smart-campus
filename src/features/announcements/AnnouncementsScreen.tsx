@@ -1,19 +1,33 @@
 import React, { useState } from "react";
-import { View, Text, FlatList, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  useWindowDimensions,
+  SectionList,
+} from "react-native";
 import SearchField from "../../components/SearchField";
 import AnnouncementRow from "./AnnouncementRow";
-import { announcements } from "./announcementData";
+import { groupAnnouncements } from "./announcementData";
 import { colors, radius, spacing, typography } from "../../theme";
 import EmptyAnnouncements from "./EmptyAnnouncements";
+import { Announcement } from "./types";
 
-export function AnnouncementsScreen() {
+interface AnnouncementsScreenProps {
+  announcements: Announcement[];
+}
+
+const AnnouncementsScreen = ({ announcements }: AnnouncementsScreenProps) => {
   const [query, setQuery] = useState<string>("");
+  const { fontScale, width } = useWindowDimensions();
 
   const filtered = announcements.filter((item) =>
     `${item.title} ${item.summary} ${item.category}`
       .toLowerCase()
       .includes(query.trim().toLowerCase()),
   );
+
+  const groupedSections = groupAnnouncements(filtered);
 
   const handleRowPress = (id: string) => {
     console.log(`Reading announcement with ID: ${id}`);
@@ -22,36 +36,52 @@ export function AnnouncementsScreen() {
   const ListDivider = () => <View style={styles.divider} />;
 
   return (
-    <FlatList
-      data={filtered}
-      keyExtractor={(item) => item.id}
-      renderItem={({ item }) => (
-        <AnnouncementRow announcement={item} onPress={handleRowPress} />
-      )}
-      ItemSeparatorComponent={ListDivider}
-      ListEmptyComponent={EmptyAnnouncements}
-      ListHeaderComponent={
-        <View style={styles.header}>
-          <Text accessibilityRole="header" style={styles.headerTitle}>
-            Campus Announcements
-          </Text>
-          <SearchField
-            value={query}
-            placeholder="Search for announcements, events,..."
-            onChangeText={setQuery}
-            onDeleteText={() => setQuery("")}
+    <View style={styles.container}>
+      <SectionList
+        sections={groupedSections}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <AnnouncementRow announcement={item} onPress={handleRowPress} />
+        )}
+        ItemSeparatorComponent={ListDivider}
+        ListEmptyComponent={
+          <EmptyAnnouncements
+            query={query}
+            onDeleteQuery={() => setQuery("")}
           />
-        </View>
-      }
-      keyboardShouldPersistTaps="handled"
-    />
+        }
+        renderSectionHeader={({ section: { title } }) => (
+          <View style={styles.sectionHeaderContainer}>
+            <Text accessibilityRole="header" style={styles.sectionHeaderTitle}>
+              {title}
+            </Text>
+          </View>
+        )}
+        ListHeaderComponent={
+          <View style={styles.header}>
+            <SearchField
+              value={query}
+              placeholder="Search for announcements, events,..."
+              onChangeText={setQuery}
+              onDeleteText={() => setQuery("")}
+            />
+          </View>
+        }
+        stickySectionHeadersEnabled={fontScale < 1.5}
+        keyboardShouldPersistTaps="handled"
+      />
+    </View>
   );
-}
+};
+
+export default AnnouncementsScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
+    padding: spacing.md,
+    paddingVertical: 46,
   },
   header: {
     padding: spacing.md,
@@ -76,5 +106,18 @@ const styles = StyleSheet.create({
   divider: {
     height: 1,
     backgroundColor: colors.border,
+  },
+  sectionHeaderContainer: {
+    backgroundColor: "#E2E8F0",
+    paddingVertical: spacing.xs + 2,
+    paddingHorizontal: spacing.md,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
+  },
+  sectionHeaderTitle: {
+    ...typography.label,
+    color: colors.primaryDark,
+    fontSize: 13,
+    letterSpacing: 0.5,
   },
 });

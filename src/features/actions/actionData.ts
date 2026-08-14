@@ -4,8 +4,7 @@ export const quickActions: QuickAction[] = [
   {
     id: "schedule",
     label: "View schedule",
-    description:
-      "Quickly access and review your complete, up-to-date daily timetable including upcoming classes, room changes, sudden instructor updates, laboratory sessions, and important academic examination slots across all registered semesters.",
+    description: "Access your timetable, upcoming classes, and exam slots.",
   },
   {
     id: "map",

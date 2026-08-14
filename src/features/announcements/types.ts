@@ -5,3 +5,8 @@ export interface Announcement {
   category: "academic" | "event" | "service";
   publishedAt: string;
 }
+
+export interface AnnouncementSection {
+  title: string;
+  data: Announcement[];
+}
