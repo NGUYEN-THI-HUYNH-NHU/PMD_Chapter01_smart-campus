@@ -8,7 +8,7 @@ import {
   ScrollView,
 } from "react-native";
 import React, { useState } from "react";
-import { ProfileFormValues } from "./validation";
+import validateProfile, { ProfileFormValues } from "./validation";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Header from "../../components/Header";
 import { FormField } from "../../components/FormField";
@@ -30,6 +30,8 @@ const ProfileFormScreen = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
+  const errors = validateProfile(values);
+
   const handleChange = (field: keyof ProfileFormValues, text: string) => {
     setValues((prev) => ({ ...prev, [field]: text }));
   };
@@ -38,8 +40,20 @@ const ProfileFormScreen = () => {
     setTouched((prev) => ({ ...prev, [field]: true }));
   };
 
+  const getFieldError = (field: keyof ProfileFormValues) => {
+    return submitted || touched[field] ? errors[field] : undefined;
+  };
+
   const handleSubmit = () => {
     setSubmitted(true);
+
+    if (Object.keys(errors).length > 0) {
+      Alert.alert(
+        "Data entry error",
+        "Please double-check the information highlighted in red",
+      );
+      return;
+    }
 
     setIsSubmitting(true);
     setTimeout(() => {
@@ -70,6 +84,7 @@ const ProfileFormScreen = () => {
               value={values.fullName}
               onChangeText={(v) => handleChange("fullName", v)}
               onBlur={() => handleBlur("fullName")}
+              error={getFieldError("fullName")}
               inputProps={{
                 placeholder: "e.g. Nguyễn Thị Huỳnh Như",
                 autoComplete: "name",
@@ -81,9 +96,10 @@ const ProfileFormScreen = () => {
               value={values.studentId}
               onChangeText={(v) => handleChange("studentId", v)}
               onBlur={() => handleBlur("studentId")}
+              error={getFieldError("studentId")}
               inputProps={{
                 placeholder: "23638921",
-                autoCapitalize: "characters",
+                keyboardType: "number-pad",
                 returnKeyType: "next",
               }}
             />
@@ -92,6 +108,7 @@ const ProfileFormScreen = () => {
               value={values.email}
               onChangeText={(v) => handleChange("email", v)}
               onBlur={() => handleBlur("email")}
+              error={getFieldError("email")}
               inputProps={{
                 placeholder: "sid.name@school.edu.vn",
                 keyboardType: "email-address",
@@ -104,6 +121,7 @@ const ProfileFormScreen = () => {
               value={values.program}
               onChangeText={(v) => handleChange("program", v)}
               onBlur={() => handleBlur("program")}
+              error={getFieldError("program")}
               inputProps={{
                 placeholder: "Software Engineering",
                 returnKeyType: "next",
@@ -115,6 +133,7 @@ const ProfileFormScreen = () => {
                 value={values.bio}
                 onChangeText={(v) => handleChange("bio", v)}
                 onBlur={() => handleBlur("bio")}
+                error={getFieldError("bio")}
                 inputProps={{
                   placeholder:
                     "Briefly share your learning goals and interests...",
