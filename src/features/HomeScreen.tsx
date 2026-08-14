@@ -36,38 +36,40 @@ const HomeScreen = () => {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.content}>
-      <Header
-        title="SmartCampus"
-        subtitle="Everything you need, one campus away"
-      />
-      <View style={styles.welcomeCard}>
-        <Avatar name={student.name} size={72} uri={student.photoUrl!} />
-        <View style={styles.welcomeText}>
-          <Text style={styles.eyebrow}>WELCOME!</Text>
-          <Text style={styles.studentName}>{student.name}</Text>
-          <Text style={styles.studentProgram}>{student.program}</Text>
-        </View>
-      </View>
-
-      <View>
-        <Text style={commonStyles.sectionTitle}>Announcements</Text>
-        <AnnouncementsPreview
-          numOfAnnouncements={3}
-          onPress={handleAnnouncementRowPress}
+    <SafeAreaProvider style={commonStyles.safeArea}>
+      <ScrollView contentContainerStyle={styles.content}>
+        <Header
+          title="SmartCampus"
+          subtitle="Everything you need, one campus away"
         />
-      </View>
+        <View style={styles.welcomeCard}>
+          <Avatar name={student.name} size={72} uri={student.photoUrl!} />
+          <View style={styles.welcomeText}>
+            <Text style={styles.eyebrow}>WELCOME!</Text>
+            <Text style={styles.studentName}>{student.name}</Text>
+            <Text style={styles.studentProgram}>{student.program}</Text>
+          </View>
+        </View>
 
-      <View>
-        <Text style={commonStyles.sectionTitle}>Quick actions</Text>
-        <ActionList actions={quickActions} />
-      </View>
+        <View>
+          <Text style={commonStyles.sectionTitle}>Announcements</Text>
+          <AnnouncementsPreview
+            numOfAnnouncements={3}
+            onPress={handleAnnouncementRowPress}
+          />
+        </View>
 
-      <View>
-        <Text style={commonStyles.sectionTitle}>My courses</Text>
-        <CourseList courses={courses} />
-      </View>
-    </ScrollView>
+        <View>
+          <Text style={commonStyles.sectionTitle}>Quick actions</Text>
+          <ActionList />
+        </View>
+
+        <View>
+          <Text style={commonStyles.sectionTitle}>My courses</Text>
+          <CourseList />
+        </View>
+      </ScrollView>
+    </SafeAreaProvider>
   );
 };
 

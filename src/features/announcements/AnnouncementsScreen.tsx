@@ -8,18 +8,15 @@ import {
 } from "react-native";
 import SearchField from "../../components/SearchField";
 import AnnouncementRow from "./AnnouncementRow";
-import { groupAnnouncements } from "./announcementData";
+import { announcements, groupAnnouncements } from "./announcementData";
 import { colors, radius, spacing, typography } from "../../theme";
 import EmptyAnnouncements from "./EmptyAnnouncements";
-import { Announcement } from "./types";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { commonStyles } from "../../styles";
 
-interface AnnouncementsScreenProps {
-  announcements: Announcement[];
-}
-
-const AnnouncementsScreen = ({ announcements }: AnnouncementsScreenProps) => {
+const AnnouncementsScreen = () => {
   const [query, setQuery] = useState<string>("");
-  const { fontScale, width } = useWindowDimensions();
+  const { fontScale } = useWindowDimensions();
 
   const filtered = announcements.filter((item) =>
     `${item.title} ${item.summary} ${item.category}`
@@ -36,41 +33,53 @@ const AnnouncementsScreen = ({ announcements }: AnnouncementsScreenProps) => {
   const ListDivider = () => <View style={styles.divider} />;
 
   return (
-    <View style={styles.container}>
-      <SectionList
-        sections={groupedSections}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <AnnouncementRow announcement={item} onPress={handleRowPress} />
-        )}
-        ItemSeparatorComponent={ListDivider}
-        ListEmptyComponent={
-          <EmptyAnnouncements
-            query={query}
-            onDeleteQuery={() => setQuery("")}
+    <SafeAreaProvider style={commonStyles.safeArea}>
+      <View style={styles.container}>
+        <View style={commonStyles.header}>
+          <Text accessibilityRole="header" style={commonStyles.headerTitle}>
+            Announcements
+          </Text>
+          <Text style={commonStyles.headerSubtitle}>
+            Stay updated with the latest university news, academic schedules,
+            and events
+          </Text>
+        </View>
+        <View style={styles.header}>
+          <SearchField
+            value={query}
+            placeholder="Search for announcements, events,..."
+            onChangeText={setQuery}
+            onDeleteText={() => setQuery("")}
           />
-        }
-        renderSectionHeader={({ section: { title } }) => (
-          <View style={styles.sectionHeaderContainer}>
-            <Text accessibilityRole="header" style={styles.sectionHeaderTitle}>
-              {title}
-            </Text>
-          </View>
-        )}
-        ListHeaderComponent={
-          <View style={styles.header}>
-            <SearchField
-              value={query}
-              placeholder="Search for announcements, events,..."
-              onChangeText={setQuery}
-              onDeleteText={() => setQuery("")}
+        </View>
+        <SectionList
+          sections={groupedSections}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <AnnouncementRow announcement={item} onPress={handleRowPress} />
+          )}
+          ItemSeparatorComponent={ListDivider}
+          ListEmptyComponent={
+            <EmptyAnnouncements
+              query={query}
+              onDeleteQuery={() => setQuery("")}
             />
-          </View>
-        }
-        stickySectionHeadersEnabled={fontScale < 1.5}
-        keyboardShouldPersistTaps="handled"
-      />
-    </View>
+          }
+          renderSectionHeader={({ section: { title } }) => (
+            <View style={styles.sectionHeaderContainer}>
+              <Text
+                accessibilityRole="header"
+                style={styles.sectionHeaderTitle}
+              >
+                {title}
+              </Text>
+            </View>
+          )}
+          stickySectionHeadersEnabled={fontScale < 1.5}
+          keyboardShouldPersistTaps="handled"
+        />
+      </View>
+    </SafeAreaProvider>
   );
 };
 
@@ -80,7 +89,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
-    padding: spacing.md,
     paddingVertical: 46,
   },
   header: {
