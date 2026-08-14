@@ -2,6 +2,7 @@ import HomeScreen from "./src/features/HomeScreen";
 import AnnouncementsScreen from "./src/features/announcements/AnnouncementsScreen";
 import { StatusBar } from "expo-status-bar";
 import CoursesScreen from "./src/features/courses/CoursesScreen";
+import ProfileFormScreen from "./src/features/profile/ProfileFormScreen";
 
 export default function App() {
   return (
@@ -12,7 +13,10 @@ export default function App() {
       {/* <AnnouncementsScreen /> */}
 
       {/* Test trang Courses */}
-      <CoursesScreen />
+      {/* <CoursesScreen /> */}
+
+      {/* Test trang Profile */}
+      <ProfileFormScreen />
     </>
   );
 }

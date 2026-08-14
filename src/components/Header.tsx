@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import { colors } from "../theme";
+import { commonStyles } from "../styles";
 
 interface HeaderProps {
   title: string;
@@ -8,9 +9,11 @@ interface HeaderProps {
 
 const Header = ({ title, subtitle }: HeaderProps) => {
   return (
-    <View style={styles.header}>
-      <Text style={styles.headerTitle}>{title}</Text>
-      {subtitle && <Text style={styles.headerSubtitle}>{subtitle}</Text>}
+    <View style={commonStyles.header}>
+      <Text accessibilityRole="header" style={commonStyles.headerTitle}>
+        {title}
+      </Text>
+      <Text style={commonStyles.headerSubtitle}>{subtitle}</Text>
     </View>
   );
 };

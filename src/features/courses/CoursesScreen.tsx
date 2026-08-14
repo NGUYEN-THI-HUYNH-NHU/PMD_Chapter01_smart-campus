@@ -9,6 +9,7 @@ import { courses } from "./courseData";
 import { CourseCard } from "./CourseCard";
 import { commonStyles } from "../../styles";
 import { colors, spacing } from "../../theme";
+import Header from "../../components/Header";
 
 const CoursesScreen = () => {
   const { width } = useWindowDimensions();
@@ -17,14 +18,10 @@ const CoursesScreen = () => {
 
   return (
     <View style={styles.container}>
-      <View style={commonStyles.header}>
-        <Text accessibilityRole="header" style={commonStyles.headerTitle}>
-          My Courses
-        </Text>
-        <Text style={commonStyles.headerSubtitle}>
-          Track your study progress and manage your courses for the semester
-        </Text>
-      </View>
+      <Header
+        title="My courses"
+        subtitle=" Track your study progress and manage your courses for the semester"
+      />
       <ScrollView
         contentContainerStyle={[
           styles.scrollContent,
