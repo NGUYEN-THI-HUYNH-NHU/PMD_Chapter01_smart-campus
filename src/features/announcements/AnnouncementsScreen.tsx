@@ -13,6 +13,7 @@ import { colors, radius, spacing, typography } from "../../theme";
 import EmptyAnnouncements from "./EmptyAnnouncements";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { commonStyles } from "../../styles";
+import Header from "../../components/Header";
 
 const AnnouncementsScreen = () => {
   const [query, setQuery] = useState<string>("");
@@ -35,15 +36,10 @@ const AnnouncementsScreen = () => {
   return (
     <SafeAreaProvider style={commonStyles.safeArea}>
       <View style={styles.container}>
-        <View style={commonStyles.header}>
-          <Text accessibilityRole="header" style={commonStyles.headerTitle}>
-            Announcements
-          </Text>
-          <Text style={commonStyles.headerSubtitle}>
-            Stay updated with the latest university news, academic schedules,
-            and events
-          </Text>
-        </View>
+        <Header
+          title="Announcements"
+          subtitle="Stay updated with the latest university news, academic schedules, and events"
+        />
         <View style={styles.header}>
           <SearchField
             value={query}

@@ -60,7 +60,8 @@ const styles = StyleSheet.create({
     padding: spacing.sm,
   },
   rowPressed: {
-    backgroundColor: "#rgba(0, 0, 0, 0.03)",
+    backgroundColor: "rgba(23, 107, 154, 0.12)",
+    borderColor: "rgba(23, 107, 154, 0.12)",
   },
   rowText: {
     flex: 1,
