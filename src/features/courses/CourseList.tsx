@@ -2,14 +2,9 @@ import { View, Text, Pressable, StyleSheet } from "react-native";
 import { colors, radius, spacing } from "../../theme";
 import { useState } from "react";
 import { CourseCard } from "./CourseCard";
-import { commonStyles } from "../../styles/index";
-import { Course } from "./types";
+import { courses } from "./courseData";
 
-interface CourseListProps {
-  courses: Course[];
-}
-
-const CourseList = ({ courses }: CourseListProps) => {
+const CourseList = () => {
   const [courseIndex, setCourseIndex] = useState<number>(0);
 
   const handleCoursePress = (id: string) => {
